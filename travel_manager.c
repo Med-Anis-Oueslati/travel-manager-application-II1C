@@ -32,7 +32,7 @@ typedef struct voyage
 
 void add_trip(voyage A[], int *CPT) {
 
-    printf("\nADDING A NEW TRIP\n\n");
+    printf("\nAJOUT D'UN NOUVEAU VOYAGE\n\n");
     A[*CPT].id = *CPT + 1;
     printf("ID : %d\n", A[*CPT].id);
     printf("DESTINATION : ");

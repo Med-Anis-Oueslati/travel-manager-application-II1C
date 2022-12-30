@@ -49,20 +49,20 @@ void add_trip(voyage A[], int *CPT) {
     printf("PRIX : ");
     fflush(stdin);
     scanf("%f", &A[*CPT].prix);
-    printf("DATE DE DEPART : ");
+    printf("DATE DE DEPART (dd/mm/yyyy): ");
     fflush(stdin);
     scanf("%d/%d/%d",&A[*CPT].dated.jour,&A[*CPT].dated.mois,&A[*CPT].dated.annee);
-    printf("TEMPS DE DEPART : ");
+    printf("TEMPS DE DEPART (hh:mm): ");
     fflush(stdin);
     scanf("%d:%d",&A[*CPT].tempsd.heure,&A[*CPT].tempsd.minute);
-    printf("TEMPS D'ARRIVEE : ");
+    printf("TEMPS D'ARRIVEE (hh:mm): ");
     fflush(stdin);
     scanf("%d:%d",&A[*CPT].tempsa.heure,&A[*CPT].tempsa.minute);
-    printf("DUREE : ");
+    printf("DUREE (hh:mm): ");
     fflush(stdin);
     scanf("%d:%d",&A[*CPT].duree.heure,&A[*CPT].duree.minute);
 
-    printf("\nADDITION SUCCESSFUL!");
+    printf("\nAJOUT REUSSI!");
     (*CPT)++; // Increment the count of trips
     getch();
 }
@@ -72,7 +72,7 @@ void delete_trip(voyage A[], int *CPT) {
     int i;
     int found = 0;
 
-    printf("Enter the ID of the trip you want to delete: ");
+    printf("Entrez l'ID du voyage que vous souhaitez supprimer: ");
     scanf("%d", &id);
 
     // Search for the trip with the specified ID
@@ -89,23 +89,23 @@ void delete_trip(voyage A[], int *CPT) {
             A[i] = A[i + 1];
         }
         (*CPT)--; // Decrement the count of trips
-        printf("\nTRIP DELETED SUCCESSFULLY!");
+        printf("\nVOYAGE SUPPRIME AVEC SUCCES!");
     } else {
-        printf("\nTRIP NOT FOUND!");
+        printf("\nVOYAGE NON TROUVE!");
     }
 
     getch();
 }
 
-void search_by_price(voyage A[], int CPT, float min_price, float max_price) {
+void search_by_price(voyage A[], int CPT, float prixinf, float prixsup,char destination[],char depart[] ) {
     int i;
     int found = 0;
 
-    printf("SEARCHING FOR TRIPS BETWEEN %.2f AND %.2f\n\n", min_price, max_price);
+   printf("RECHERCHE DE VOYAGES ENTRE %.2f ET %.2f, DE %s A %s\n\n", prixinf, prixsup, depart, destination);
 
-    // Search for trips with prices within the specified range
+    // Search for trips with prices within the specified range and matching the specified destination and departure cities
     for (i = 0; i < CPT; i++) {
-        if (A[i].prix >= min_price && A[i].prix <= max_price) {
+        if (A[i].prix >= prixinf && A[i].prix <= prixsup && strcmp(A[i].destination, destination) == 0 && strcmp(A[i].depart, depart) == 0)  {
             printf("ID: %d\n", A[i].id);
             printf("DESTINATION: %s\n", A[i].destination);
             printf("DEPART: %s\n", A[i].depart);
@@ -122,7 +122,7 @@ void search_by_price(voyage A[], int CPT, float min_price, float max_price) {
     }
 
     if (!found) {
-        printf("NO TRIPS FOUND WITHIN THE SPECIFIED PRICE RANGE!");
+        printf("AUCUN VOYAGE TROUVE DANS LA GAMME DE PRIX SPÉCIFIEE!");
     }
 }
 
@@ -133,7 +133,7 @@ void modify_trip(voyage A[], int CPT, int trip_id) {
     int new_value;
 
 
-    printf("MODIFYING TRIP WITH ID %d\n\n", trip_id);
+    printf("MODIFIER LE VOYAGE AVEC ID %d\n\n", trip_id);
 
     // Search for the trip with the specified ID
     for (i = 0; i < CPT; i++) {
@@ -144,12 +144,12 @@ void modify_trip(voyage A[], int CPT, int trip_id) {
     }
 
     if (!found) {
-        printf("TRIP WITH ID %d NOT FOUND!", trip_id);
+        printf("VOYAGE AVEC ID %d NON TROUVÉ!", trip_id);
         return;
     }
 
     // Modify the details of the trip
-    printf("\nWHAT DO YOU WANT TO MODIFY?\n");
+    printf("\nQUE VOULEZ-VOUS MODIFIER?\n");
     printf("1. DESTINATION\n");
     printf("2. DEPART\n");
     printf("3. AIRPORT\n");
@@ -161,7 +161,7 @@ void modify_trip(voyage A[], int CPT, int trip_id) {
     printf("9. DUREE\n");
     printf("10. EXIT\n");
     int choice;
-    printf("\nEnter your choice: ");
+    printf("\nEntrez votre choix: ");
     scanf("%d", &choice);
 
     switch (choice) {
@@ -190,40 +190,40 @@ void modify_trip(voyage A[], int CPT, int trip_id) {
             scanf("%f", &A[i].prix);
             break;
         case 6: // Modify date de depart
-            printf("DATE DE DEPART : ");
+            printf("DATE DE DEPART (dd/mm/yyyy): ");
             fflush(stdin);
             scanf("%d/%d/%d",&A[i].dated.jour,&A[i].dated.mois,&A[i].dated.annee);
             break;
         case 7: // Modify temps de depart
-            printf("TEMPS DE DEPART : ");
+            printf("TEMPS DE DEPART (hh:mm): ");
             fflush(stdin);
             scanf("%d:%d",&A[i].tempsd.heure,&A[i].tempsd.minute);
             break;
         case 8: // Modify temps d'arrivee
-            printf("TEMPS D'ARRIVEE : ");
+            printf("TEMPS D'ARRIVEE (hh:mm): ");
             fflush(stdin);
             scanf("%d:%d",&A[i].tempsa.heure,&A[i].tempsa.minute);
             break;
         case 9: // Modify duree
-            printf("DUREE : ");
+            printf("DUREE (hh:mm): ");
             fflush(stdin);
             scanf("%d:%d",&A[i].duree.heure,&A[i].duree.minute);
             break;
         case 10: // Exit
-            printf("EXITING MODIFICATION MODE\n");
+            printf("QUITTER LE MODE MODIFICATION\n");
             return;
         default:
-            printf("INVALID CHOICE!\n");
+            printf("CHOIX INVALIDE!\n");
     }
 
-    printf("\nTRIP MODIFIED SUCCESSFULLY!");
+    printf("\nVOYAGE MODIFIE AVEC SUCCÈS!");
 }
 
 void search_trips(voyage A[], int CPT, char depart[], char destination[]) {
     int i;
     int found = 0;
 
-    printf("SEARCHING FOR TRIPS FROM %s TO %s\n\n", depart, destination);
+    printf("RECHERCHE DE VOYAGES DE %s A %s\n\n", depart, destination);
 
     // Search for trips with the specified departure and destination cities
     for (i = 0; i < CPT; i++) {
@@ -244,19 +244,19 @@ void search_trips(voyage A[], int CPT, char depart[], char destination[]) {
     }
 
     if (!found) {
-        printf("NO TRIPS FOUND FROM %s TO %s!", depart, destination);
+        printf("AUCUN VOYAGE TROUVE DE %s A %s!", depart, destination);
     }
 }
 
-void search_trips_by_date(voyage A[], int CPT, char destination[], int jour, int mois, int annee) {
+void search_trips_by_date(voyage A[], int CPT, char destination[],char depart[], int jour, int mois, int annee) {
     int i;
     int found = 0;
 
-    printf("SEARCHING FOR TRIPS FROM %s ON %d/%d/%d\n\n", destination, jour, mois, annee);
+    printf("RECHERCHE DE VOYAGES DE %s A %s ON %d/%d/%d\n\n", destination,depart,jour, mois, annee);
 
     // Search for trips from the specified destination on the specified date
     for (i = 0; i < CPT; i++) {
-        if (strcmp(A[i].depart, destination) == 0 && A[i].dated.jour == jour && A[i].dated.mois == mois && A[i].dated.annee == annee) {
+        if (strcmp(A[i].depart, depart) == 0 && strcmp(A[i].destination, destination) == 0 && A[i].dated.jour == jour && A[i].dated.mois == mois && A[i].dated.annee == annee) {
             found = 1;
             printf("ID: %d\n", A[i].id);
             printf("DESTINATION: %s\n", A[i].destination);
@@ -273,7 +273,7 @@ void search_trips_by_date(voyage A[], int CPT, char destination[], int jour, int
     }
 
     if (!found) {
-        printf("NO TRIPS FOUND FROM %s ON %d/%d/%d!", destination, jour, mois, annee);
+        printf("AUCUN VOYAGE TROUVE DE %s A %S A %d/%d/%d!", destination,depart, jour, mois, annee);
     }
 }
 
@@ -285,17 +285,18 @@ void print_all_trips(voyage A[], int CPT) {
         printf("Depart: %s\n", A[i].depart);
         printf("Airport: %s\n", A[i].airport);
         printf("Class: %s\n", A[i].class);
-        printf("Price: %.2f\n", A[i].prix);
-        printf("Departure date: %d/%d/%d\n", A[i].dated.jour, A[i].dated.mois, A[i].dated.annee);
-        printf("Departure time: %d:%d\n", A[i].tempsd.heure, A[i].tempsd.minute);
-        printf("Arrival time: %d:%d\n", A[i].tempsa.heure, A[i].tempsa.minute);
-        printf("Duration: %d:%d\n", A[i].duree.heure, A[i].duree.minute);
+        printf("Prix: %.2f\n", A[i].prix);
+        printf("Date de depart: %d/%d/%d\n", A[i].dated.jour, A[i].dated.mois, A[i].dated.annee);
+        printf("Temps de depart: %d:%d\n", A[i].tempsd.heure, A[i].tempsd.minute);
+        printf("Temps d'arrivee: %d:%d\n", A[i].tempsa.heure, A[i].tempsa.minute);
+        printf("Duree de voyage: %d:%d\n", A[i].duree.heure, A[i].duree.minute);
         printf("\n");
     }
     getch();
 }
 
 int main(){
+    //variables
     voyage A[100];
     int choix=0,trip_id;
     char ch[10];
@@ -334,7 +335,8 @@ int main(){
             case 2 ://modification d'un voyage
             {
                 system("cls");
-                printf("\nENTER TRIP ID TO MODIFY: ");
+                printf("\nENTRER L'ID DE VOYAGE A MODIFIER: ");
+                fflush(stdin);
                 scanf("%d", &trip_id);
                 modify_trip(A, CPT, trip_id);
                 getch();
@@ -352,36 +354,47 @@ int main(){
                 char destination[100];
                 int jour, mois, annee;
                 char ch[10];
-                printf("SEARCH FOR TRIPS BY DATE\n\n");
-                printf("Enter destination: ");
+                printf("RECHERCHE DE VOYAGES PAR DATE\n\n");
+                printf("Entrez la ville d'arrivee: ");
                 fflush(stdin);
                 gets(destination);
-                printf("Enter date (dd/mm/yyyy): ");
+                printf("Entrez la ville de depart : ");
+                scanf("%s", depart);
+                printf("Entrz la date (dd/mm/yyyy): ");
                 fflush(stdin);
                 gets(ch);
                 sscanf(ch, "%d/%d/%d", &jour, &mois, &annee);
-                search_trips_by_date(A, CPT, destination, jour, mois, annee);
+                search_trips_by_date(A, CPT, destination,depart, jour, mois, annee);
                 getch();
                 break;
             }
             case 5 ://recherche des voyages disponibles selon un intérvale de prix
             {
                 system("cls");
-                printf("\nMINIMUM PRICE: ");
+                printf("RECHERCHE DE VOYAGES PAR GAMME DE PRIX\n\n");
+                printf("Entrez la ville d'arrivee: ");
+                fflush(stdin);
+                scanf("%s", destination);
+                printf("Entrez la ville de depart: ");
+                fflush(stdin);
+                scanf("%s", depart);
+                printf("Entrez le prix minimum: ");
+                fflush(stdin);
                 scanf("%f", &prixinf);
-                printf("MAXIMUM PRICE: ");
+                printf("Entrez le prix maximum: ");
+                fflush(stdin);
                 scanf("%f", &prixsup);
-                search_by_price(A, CPT, prixinf, prixsup);
+                search_by_price(A, CPT, prixinf, prixsup, destination, depart);
                 getch();
                 break;
             }
             case 6 ://recherche des voyages disponibles selon la ville de départ et ville d'arrivée
             {
                 system("cls");
-                printf("\nENTER DEPARTURE CITY: ");
+                printf("\nEntrez la ville de depart: ");
                 fflush(stdin);
                 gets(depart);
-                printf("\nENTER DESTINATION CITY: ");
+                printf("\nEntrez la ville d'arrivee: ");
                 fflush(stdin);
                 gets(destination);
                 search_trips(A, CPT, depart, destination);
@@ -391,7 +404,7 @@ int main(){
             case 7://Afficher tous les voyages
             {
                 system("cls");
-                printf("VIEW ALL TRIPS\n\n");
+                printf("VOIR TOUS LES VOYAGES\n\n");
                 print_all_trips(A, CPT);
                 getch();
                 break;

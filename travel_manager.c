@@ -295,6 +295,31 @@ void print_all_trips(voyage A[], int CPT) {
     getch();
 }
 
+void print_trip_by_id(voyage A[], int CPT, int trip_id) {
+    int i;
+    int found=1;
+    for (i = 0; i < CPT; i++) {
+        if (A[i].id == trip_id) {
+            found = 1;
+            printf("ID: %d\n", A[i].id);
+            printf("DESTINATION: %s\n", A[i].destination);
+            printf("DEPART: %s\n", A[i].depart);
+            printf("AIRPORT: %s\n", A[i].airport);
+            printf("CLASS: %s\n", A[i].class);
+            printf("PRIX: %.2f\n", A[i].prix);
+            printf("DATE DE DEPART: %d/%d/%d\n", A[i].dated.jour, A[i].dated.mois, A[i].dated.annee);
+            printf("TEMPS DE DEPART: %d:%d\n", A[i].tempsd.heure, A[i].tempsd.minute);
+            printf("TEMPS D'ARRIVEE: %d:%d\n", A[i].tempsa.heure, A[i].tempsa.minute);
+            printf("DUREE: %d:%d\n", A[i].duree.heure, A[i].duree.minute);
+            printf("\n");
+        }
+    }
+
+    if (!found) {
+        printf("AUCUN VOYAGE TROUVE");
+    }
+}
+
 int main(){
     //variables
     voyage A[100];
@@ -306,7 +331,7 @@ int main(){
     float prixinf;
     float prixsup;
 
-    while(choix != 8)
+    while(choix != 9)
     {
 /********** Affichage du menu **********/
         do
@@ -320,11 +345,12 @@ int main(){
             printf("\n* 5 *\tRechercher des voyages disponibles selon un intervale de prix");
             printf("\n* 6 *\tRechercher des voyages disponibles selon la ville de depart et ville d'arrivee");
             printf("\n* 7 *\tAfficher tous les voyages");
-            printf("\n* 8 *\tQuitter le programme");
+            printf("\n* 8 *\tAfficher la description d'un voyage");
+            printf("\n* 9 *\tQuitter le programme");
             printf("\n\nSaisissez votre choix : ");
             fflush(stdin);
             choix=atoi(gets(ch));
-        } while( (choix<1)||(choix>8) );
+        } while( (choix<1)||(choix>9) );
         switch(choix) {
             case 1 ://ajout d'un voyage
             {
@@ -409,7 +435,17 @@ int main(){
                 getch();
                 break;
             }
-            case 8 ://quitter le programme
+            case 8: // Print a trip with a specific id
+            {
+                system("cls");
+                printf("\nSAISIR L'ID DU VOYAGE A IMPRIMER: ");
+                fflush(stdin);
+                scanf("%d", &trip_id);
+                print_trip_by_id(A, CPT, trip_id);
+                getch();
+                break;
+            }
+            case 9 ://quitter le programme
             {
                 system("cls");
                 printf("\nA BIENTOT !");

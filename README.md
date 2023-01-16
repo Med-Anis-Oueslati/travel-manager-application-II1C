@@ -38,8 +38,9 @@ cette fonction permet de quitter le programme en affichant un message à l'utili
 les fonctions 1 , 5 et 9: Med Anis Oueslati
 les fonctions 2 et 6: Wajih Mekni
 les fonctions 3 et 7: Emna Arous
-les fonctions 4 et 8: Nouha Cherif
 
+les fonctions 4 et 8: Nouha Cherif
+ 
 # NB
 vu que certains d'entre nous ont subit une difficulté à faire monter leur travail dans github et puisque nous n'avons pas encore maitriser cet espace de travail donc nous sommes mis d'accord qu'un seul d'entre nous sera chargé de monter notre travail.
 Bonne réception et Bonne Année.

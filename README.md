@@ -10,7 +10,7 @@ Cette commande permet d identifier les details d un voyage d'où le stockage des
 # NUM 2:
 Cette commande sert à choisir l'élément à modifier d'un voyage spécifique.
 # NUM 3:
-Cette commande sert à éffacer un voyage choisi.
+Cette commande sert à éffacer un voyage choisi
 # NUM 4 : Recherche des voyages disponibles selon des dates précises
 En choisissant la date du voyage 
 il suffit donc que l'utilisateur saisit cette date et la ville d'arrivée et de départ pour qu'il 

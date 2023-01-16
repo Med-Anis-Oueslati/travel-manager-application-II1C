@@ -6,11 +6,11 @@ Cette application va vous permettre de voir tous les voyages disponibles selon v
 En effet, elle comporte les 9 fonctions suivantes:
 
 # NUM 1:
-Cette commande permet d identifier les details d un voyage d'où le stockage des informations dans un tableau.
+Cette fonction permet à l'utilisateur d'ajouter un voyage et toutes les informations qui le concerne tels que la destination,la date de depart et la durée du voyage.
 # NUM 2:
-Cette commande sert à choisir l'élément à modifier d'un voyage spécifique.
+cette fonction permet de modifier les informations concernant le voyage selon votre besoin.Il suffit donc de choisir la caractéristique que vous voulez la changer.
 # NUM 3:
-Cette commande sert à éffacer un voyage choisi
+Cette commande sert à éffacer un voyage choisi.
 # NUM 4 : Recherche des voyages disponibles selon des dates précises
 En choisissant la date du voyage 
 il suffit donc que l'utilisateur saisit cette date et la ville d'arrivée et de départ pour qu'il 

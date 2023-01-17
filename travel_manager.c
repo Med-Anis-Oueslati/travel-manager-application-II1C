@@ -3,6 +3,8 @@
 #include<string.h>
 #include<conio.h>
 
+
+
 typedef struct date
 {
     int jour;
